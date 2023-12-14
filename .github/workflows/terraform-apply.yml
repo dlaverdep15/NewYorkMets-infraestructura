@@ -1,0 +1,27 @@
+name: Terraform Apply
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chechout this repo
+        uses: actions/checkout@v2
+
+      - name: Using Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Format
+        run: terraform fmt -check -recursive
+
+      - name: Validate
+        run: terraform validate
+
+      - name: Show
+        run: terraform show
+
+      - name: Apply
+        run: terraform apply
