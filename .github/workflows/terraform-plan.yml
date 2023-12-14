@@ -1,0 +1,10 @@
+name: Terraform Plan
+on:
+  pull_request:
+    types: [opened]
+permissions:
+  pull-requests: write
+jobs:
+  terraform:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
