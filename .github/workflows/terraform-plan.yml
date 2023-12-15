@@ -1,11 +1,10 @@
 name: Terraform Plan
 on:
+  # pull_request:
+  #   types: [closed]
   push:
-    branches: [ "main" ]
-  pull_request:
-    types: [closed]
     branches:
-      - feature/**
+      - feature/pipe
 
 permissions:
   pull-requests: write
