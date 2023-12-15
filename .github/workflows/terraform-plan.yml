@@ -23,7 +23,7 @@ jobs:
       
       - name: Terraform init
         run: terraform init
-
+ 
       - name: Format
         run: terraform fmt 
 
