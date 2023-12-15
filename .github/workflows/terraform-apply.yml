@@ -1,9 +1,11 @@
 name: Terraform Apply
 on:
-  pull_request:
-    types: [closed]
+  # pull_request:
+  #   types: [closed]
+  push:
     branches:
-      - 'main'
+      #- 'main'
+      - feature/pipe
   
 permissions:
   pull-requests: write
@@ -27,21 +29,29 @@ jobs:
       - name: Format
         run: terraform fmt
 
+      - name: plan
+        run: terraform plan
+
       - name: Validate
         run: terraform validate
-
-      - name: Show
-        run: terraform show
 
       - name: Apply
         run: terraform apply -auto-approve
 
+        # if aws s3 cp terraform.tfstate s3://newyorkmets-b; then
+        #   echo "State file moved successfully to S3"
+        # else
+        #   echo "Failed, continuing..."
+        # fi
       - name: Move state to s3
         run: |
-          aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/
+          echo "Lista archivos"
+          ls & pwd
+          echo "validacion de s3"
+
         
       - name: Sleep 5 mins
-        run: sleep 300s
+        run: sleep 3s
 
       - name: Destroy
         run: terraform destroy -auto-approve
