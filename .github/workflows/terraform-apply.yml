@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  terraform:
+  terraform-apply:
     runs-on: ubuntu-latest
     steps:
       - name: Chechout this repo

@@ -1,10 +1,28 @@
 name: Terraform Plan
 on:
   pull_request:
-    types: [opened]
+    types: [closed]
+    branches:
+      - feature/**
+
 permissions:
   pull-requests: write
+
 jobs:
-  terraform:
-    name: Terraform Plan
+  terraform-plan:
     runs-on: ubuntu-latest
+    steps:
+      - name: Chechout this repo
+        uses: actions/checkout@v4
+
+      - name: Using Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Format
+        run: terraform fmt -check -recursive
+
+      - name: Validate
+        run: terraform validate
+
+      - name: Plan
+        run: terraform plan
