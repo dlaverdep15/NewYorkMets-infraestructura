@@ -35,6 +35,10 @@ jobs:
 
       - name: Apply
         run: terraform apply -auto-approve
+
+      - name: Move state to s3
+        run: |
+          aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/
         
       - name: Sleep 5 mins
         run: sleep 300s
