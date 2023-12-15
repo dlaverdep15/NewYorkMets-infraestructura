@@ -1,29 +1,20 @@
 name: Terraform Plan
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
-    branches: 
-      - feature
-    types: [opened]
-permissions:
-  pull-requests: write
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    -  name: Checkout Repository
-       uses: actions/checkout@v2
 
-    -  name: Set up Node.js
-       uses: actions/setup-node@v3
-       with:
-         node-version: 14
+    - name: Mensaje1
+      run: Estas haciendo un PR desde Feature hasta Main!
 
-    -  name: Install Dependencies
-       run: npm install
 
-    -  name: Run test
-       run: npm test
-       
          
   
