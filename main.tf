@@ -36,9 +36,9 @@ resource "aws_route_table_association" "NewYorkMets_Association_public_subnet" {
 }
 
 resource "aws_route" "aws_route_prueba" {
-  route_table_id = aws_route_table.NewYorkMets_route_table.id
+  route_table_id         = aws_route_table.NewYorkMets_route_table.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.NewYorkMets_Internet_Gateway.id
+  gateway_id             = aws_internet_gateway.NewYorkMets_Internet_Gateway.id
 }
 
 # Define un Internet Gateway
@@ -158,11 +158,11 @@ resource "aws_lb" "NewYorkMets_lb" {
 
 #Grupos de destino para el balanceador de carga
 resource "aws_lb_target_group" "NewYorkMets_Target_Group" {
-  name     = "my-target-group"
-  port     = 80
-  protocol = "HTTP"
+  name        = "my-target-group"
+  port        = 80
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = aws_vpc.NewYorkMets_vpc.id
+  vpc_id      = aws_vpc.NewYorkMets_vpc.id
 }
 
 #Listerner Load Balancer
