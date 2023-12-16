@@ -44,16 +44,21 @@ jobs:
           echo "Lista archivos"
           ls & pwd
           echo "validacion de s3"
-        
+          aws s3 ls
+          if [ -f "terraform.tfstate" ]; then
+          echo "El archivo terraform.tfstate existe, moviendo a S3..."
           if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
-          echo "State file moved successfully to S3"
+            echo "¡Archivo movido a S3 exitosamente!"
           else
-            echo "Failed, continuing..."
+            echo "¡Error al mover archivo a S3!"
+          fi
+          else
+            echo "El archivo terraform.tfstate no existe."
           fi
 
         
       - name: Sleep 5 mins
-        run: sleep 30s
+        run: sleep 3s
 
       - name: Destroy
         run: terraform destroy -auto-approve
