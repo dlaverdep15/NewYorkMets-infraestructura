@@ -38,13 +38,13 @@ jobs:
       - name: Apply
         run: terraform apply -auto-approve
 
+#        aws s3 ls
 
       - name: Move state to s3
         run: |
           echo "Lista archivos"
           ls
           echo "validacion de s3"
-          aws s3 ls
           if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
             echo "¡Archivo movido a S3 exitosamente!"
           else
