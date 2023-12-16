@@ -45,16 +45,12 @@ jobs:
           ls
           echo "validacion de s3"
           aws s3 ls
-          if [ -f "terraform.tfstate" ]; then
-            echo "El archivo terraform.tfstate existe, moviendo a S3..."
-            if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
-              echo "¡Archivo movido a S3 exitosamente!"
-            else
-              echo "¡Error al mover archivo a S3!"
-            fi
+          if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
+            echo "¡Archivo movido a S3 exitosamente!"
           else
-            echo "El archivo terraform.tfstate no existe."
+            echo "¡Error al mover archivo a S3!"
           fi
+
 
         
       - name: Sleep 5 mins
