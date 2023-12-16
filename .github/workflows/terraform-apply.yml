@@ -38,16 +38,18 @@ jobs:
       - name: Apply
         run: terraform apply -auto-approve
 
-        # if aws s3 cp terraform.tfstate s3://newyorkmets-b; then
-        #   echo "State file moved successfully to S3"
-        # else
-        #   echo "Failed, continuing..."
-        # fi
+
       - name: Move state to s3
         run: |
           echo "Lista archivos"
           ls & pwd
           echo "validacion de s3"
+        
+          if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
+          echo "State file moved successfully to S3"
+          else
+            echo "Failed, continuing..."
+          fi
 
         
       - name: Sleep 5 mins
