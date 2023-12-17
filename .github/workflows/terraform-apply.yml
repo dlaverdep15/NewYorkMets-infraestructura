@@ -68,6 +68,12 @@ jobs:
           archivos=$(ls)
           if echo "$archivos" | grep -q 'terraform.tfstate'; then
             echo "si esta tf state"
+            if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
+              echo "se enviado a S3"
+            else
+              echo "Error al moverlo, ejecutando destroy"
+              terraform destroy -auto-approve
+            fi
           else
             echo "no esta tf state"
           fi
