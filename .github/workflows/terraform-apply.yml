@@ -63,7 +63,15 @@ jobs:
 #             echo "¡Error al mover archivo a S3!"
 #           fi 
       - name: List
-        run: ls
+        run: |
+          ls
+          archivos=$(ls)
+          if echo "$archivos" | grep -q 'terraform.tfstate'; then
+            echo "si esta tf state"
+          else
+            echo "no esta tf state"
+          fi
+          
 
       - name: Sleep 5 mins
         run: sleep 3s
