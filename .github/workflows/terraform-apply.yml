@@ -47,8 +47,8 @@ jobs:
         run: |
           aws s3 ls
 
-#       - name: Apply
-#         run: terraform apply -auto-approve
+      - name: Apply
+        run: terraform apply -auto-approve
 
 # #        aws s3 ls
 
@@ -62,11 +62,11 @@ jobs:
 #           else
 #             echo "¡Error al mover archivo a S3!"
 #           fi 
+      - name: List
+        run: ls
 
+      - name: Sleep 5 mins
+        run: sleep 3s
 
-        
-#       - name: Sleep 5 mins
-#         run: sleep 3s
-
-#       - name: Destroy
-#         run: terraform destroy -auto-approve
+      - name: Destroy
+        run: terraform destroy -auto-approve
