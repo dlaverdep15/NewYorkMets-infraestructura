@@ -36,6 +36,9 @@ jobs:
       - name: Validate
         run: terraform validate
 
+      - name: Show
+        run: terraform show
+
       - name: Validate s3
         run: |
           aws s3 ls
