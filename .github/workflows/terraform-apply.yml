@@ -1,11 +1,9 @@
 name: Terraform Apply
 on:
-  # pull_request:
-  #   types: [closed]
-  push:
+  pull_request:
+    types: [closed]
     branches:
-      #- 'main'
-      - feature/pipe
+      - 'main'
   
 permissions:
   pull-requests: write
@@ -13,8 +11,6 @@ permissions:
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
-    # permissions:
-    #   id-token: write
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
@@ -37,9 +33,6 @@ jobs:
       - name: Format
         run: terraform fmt
 
-      - name: plan
-        run: terraform plan
-
       - name: Validate
         run: terraform validate
 
@@ -50,18 +43,6 @@ jobs:
       - name: Apply
         run: terraform apply -auto-approve
 
-# #        aws s3 ls
-
-#       - name: Move state to s3
-#         run: |
-#           echo "Lista archivos"
-#           ls
-#           echo "validacion de s3"
-#           if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
-#             echo "¡Archivo movido a S3 exitosamente!"
-#           else
-#             echo "¡Error al mover archivo a S3!"
-#           fi 
       - name: List
         run: |
           ls
@@ -69,7 +50,7 @@ jobs:
           if echo "$archivos" | grep -q 'terraform.tfstate'; then
             echo "si esta tf state"
             if aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/; then
-              echo "se enviado a S3"
+              echo "Se ha enviado a S3"
             else
               echo "Error al moverlo, ejecutando destroy"
               terraform destroy -auto-approve
@@ -77,7 +58,6 @@ jobs:
           else
             echo "no esta tf state"
           fi
-          
 
       - name: Sleep 5 mins
         run: sleep 3s
