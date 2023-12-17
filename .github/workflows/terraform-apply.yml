@@ -27,9 +27,6 @@ jobs:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Validate s3
-        run: |
-          aws s3 ls
 
       - name: Using Terraform
         uses: hashicorp/setup-terraform@v1
@@ -45,6 +42,10 @@ jobs:
 
       - name: Validate
         run: terraform validate
+
+      - name: Validate s3
+        run: |
+          aws s3 ls
 
 #       - name: Apply
 #         run: terraform apply -auto-approve
