@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+    # env:
+    #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+    #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
@@ -31,20 +31,20 @@ jobs:
         run: |
           aws s3 ls
 
-#       - name: Using Terraform
-#         uses: hashicorp/setup-terraform@v1
+      - name: Using Terraform
+        uses: hashicorp/setup-terraform@v1
 
-#       - name: Terraform init
-#         run: terraform init
+      - name: Terraform init
+        run: terraform init
 
-#       - name: Format
-#         run: terraform fmt
+      - name: Format
+        run: terraform fmt
 
-#       - name: plan
-#         run: terraform plan
+      - name: plan
+        run: terraform plan
 
-#       - name: Validate
-#         run: terraform validate
+      - name: Validate
+        run: terraform validate
 
 #       - name: Apply
 #         run: terraform apply -auto-approve
