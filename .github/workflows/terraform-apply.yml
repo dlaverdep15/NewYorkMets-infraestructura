@@ -68,7 +68,7 @@ jobs:
           fi
 
       - name: Sleep 5 mins
-        run: sleep 300s
+        run: sleep 600s
 
       - name: Destroy
         run: terraform destroy -auto-approve
