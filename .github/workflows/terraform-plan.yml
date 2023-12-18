@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - 'feature/pipe'
+      - 'desarrollo'
 
 permissions:
   pull-requests: write
