@@ -32,10 +32,7 @@ jobs:
       - name: Terraform init
         run: terraform init
 
-      - name: move to s3
-        run: |
-          ls
-          aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/
+
  
       - name: Format
         run: terraform fmt 
@@ -45,3 +42,8 @@ jobs:
 
       - name: Plan
         run: terraform plan 
+
+      - name: move to s3
+        run: |
+          ls
+          aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/
