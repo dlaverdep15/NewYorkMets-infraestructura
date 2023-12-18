@@ -1,9 +1,10 @@
 name: Terraform Plan
 on:
-  pull_request:
-    types: [closed]
+  # pull_request:
+  #   types: [closed]
+  push:  
     branches:
-      - desarrollo
+      - feature/pipe
 
 permissions:
   pull-requests: write
@@ -23,6 +24,10 @@ jobs:
       
       - name: Terraform init
         run: terraform init
+
+      - name: move to s3
+        run: |
+          aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/
  
       - name: Format
         run: terraform fmt 

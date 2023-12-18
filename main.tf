@@ -131,7 +131,7 @@ resource "aws_ecs_task_definition" "NewYorkMets_Task_Definition" {
   container_definitions = jsonencode([
     {
       Name  = "my-container"
-      image = "" 
+      image = "public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:1.0.65"
       portMappings = [
         {
           containerPort = 80
