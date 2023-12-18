@@ -1,10 +1,9 @@
 name: Terraform Plan
 on:
-  # pull_request:
-  #   types: [closed]
-  push:  
+  pull_request:
+    types: [closed]
     branches:
-      - feature/pipe
+      - 'desarrollo'
 
 permissions:
   pull-requests: write
@@ -43,7 +42,4 @@ jobs:
       - name: Plan
         run: terraform plan 
 
-      - name: move to s3
-        run: |
-          ls
-          aws s3 cp terraform.tfstate s3://newyorkmets-bucket3/
+
