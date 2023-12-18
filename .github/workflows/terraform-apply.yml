@@ -40,10 +40,6 @@ jobs:
       - name: Show
         run: terraform show
 
-      - name: list s3
-        run: |
-          aws s3 ls
-
       - name: Apply
         run: terraform apply -auto-approve || echo "Error detected"
 
