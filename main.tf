@@ -36,9 +36,9 @@ resource "aws_route_table_association" "NewYorkMets_Association_public_subnet" {
 }
 
 resource "aws_route" "aws_route_prueba" {
-  route_table_id         = aws_route_table.NewYorkMets_route_table.id
+  route_table_id = aws_route_table.NewYorkMets_route_table.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.NewYorkMets_Internet_Gateway.id
+  gateway_id = aws_internet_gateway.NewYorkMets_Internet_Gateway.id
 }
 
 # Define un Internet Gateway
@@ -101,6 +101,22 @@ resource "aws_iam_role" "NewYorkMets_Excecution_role" {
   })
 }
 
+resource "aws_iam_role_policy_attachment" "ecr_pull_image" {
+  role       = aws_iam_role.NewYorkMets_Excecution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  # Puedes usar la política "AmazonEC2ContainerRegistryFullAccess" para permisos completos
+}
+
+resource "aws_iam_role_policy_attachment" "ecr_access" {
+  role       = aws_iam_role.NewYorkMets_Excecution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_access" {
+  role       = aws_iam_role.NewYorkMets_Excecution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+}
+
 # Definición de la tarea de ECS
 resource "aws_ecs_task_definition" "NewYorkMets_Task_Definition" {
   family                   = "Task-NewYorkMets-1"
@@ -158,11 +174,11 @@ resource "aws_lb" "NewYorkMets_lb" {
 
 #Grupos de destino para el balanceador de carga
 resource "aws_lb_target_group" "NewYorkMets_Target_Group" {
-  name        = "my-target-group"
-  port        = 80
-  protocol    = "HTTP"
+  name     = "my-target-group"
+  port     = 80
+  protocol = "HTTP"
   target_type = "ip"
-  vpc_id      = aws_vpc.NewYorkMets_vpc.id
+  vpc_id   = aws_vpc.NewYorkMets_vpc.id
 }
 
 #Listerner Load Balancer
