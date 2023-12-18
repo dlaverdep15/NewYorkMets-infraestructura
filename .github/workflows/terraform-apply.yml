@@ -11,17 +11,14 @@ permissions:
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET }}
           aws-region: us-east-1
 
       - name: Using Terraform
@@ -62,7 +59,7 @@ jobs:
             echo "no esta tf state"
           fi
 
-      - name: Sleep 5 mins
+      - name: Sleep 10 mins
         run: sleep 600s
 
       - name: Destroy
