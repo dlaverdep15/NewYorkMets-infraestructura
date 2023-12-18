@@ -115,7 +115,7 @@ resource "aws_ecs_task_definition" "NewYorkMets_Task_Definition" {
   container_definitions = jsonencode([
     {
       Name  = "my-container"
-      image = "nginx:latest" 
+      image = "" 
       portMappings = [
         {
           containerPort = 80
