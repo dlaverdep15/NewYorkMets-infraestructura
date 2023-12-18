@@ -40,12 +40,16 @@ jobs:
       - name: Show
         run: terraform show
 
-      - name: Validate s3
+      - name: list s3
         run: |
           aws s3 ls
 
       - name: Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve || echo "Error detected"
+
+      - name: Destroy on error
+        if: ${{ failure() }}
+        run: terraform destroy -auto-approve
 
       - name: List
         run: |
