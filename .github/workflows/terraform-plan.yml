@@ -1,8 +1,7 @@
 name: Terraform Plan
 on:
-  # pull_request:
-  #   types: [closed]
-  push:  
+  pull_request:
+    types: [closed]
     branches:
       - 'feature/pipe'
 

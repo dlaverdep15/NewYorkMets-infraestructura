@@ -1,9 +1,10 @@
 name: Terraform Apply
 on:
-  pull_request:
-    types: [closed]  
+  # pull_request:
+  #   types: [closed]
+  push:  
     branches:
-      - 'main'
+      - 'feature/pipe'
   
 permissions:
   pull-requests: write
@@ -17,11 +18,11 @@ jobs:
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
-          aws-region: us-east-2
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
+      #     aws-region: us-east-2
 
       - name: Using Terraform
         uses: hashicorp/setup-terraform@v1
@@ -62,7 +63,7 @@ jobs:
           fi
 
       - name: Sleep 5 mins
-        run: sleep 600s
+        run: sleep 6s
 
       - name: Destroy
         run: terraform destroy -auto-approve
