@@ -1,10 +1,9 @@
 name: Terraform Apply
 on:
-  # pull_request:
-  #   types: [closed]
-  push:  
+  pull_request:
+    types: [closed]  
     branches:
-      - 'feature/pipe'
+      - 'main'
   
 permissions:
   pull-requests: write
@@ -12,9 +11,6 @@ permissions:
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
-    # env:
-    #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-    #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
@@ -63,8 +59,8 @@ jobs:
             echo "no esta tf state"
           fi
 
-      - name: Sleep 5 mins
-        run: sleep 6s
+      - name: Sleep 10 mins
+        run: sleep 600s
 
       - name: Destroy
         run: terraform destroy -auto-approve
