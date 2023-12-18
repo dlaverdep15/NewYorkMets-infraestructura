@@ -131,7 +131,7 @@ resource "aws_ecs_task_definition" "NewYorkMets_Task_Definition" {
   container_definitions = jsonencode([
     {
       Name  = "my-container"
-      image = "nginx:latest"
+      image = "public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:1.0.66"
       portMappings = [
         {
           containerPort = 80
@@ -191,5 +191,5 @@ resource "aws_lb_listener" "NewYorkMets_Listener_lb" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.NewYorkMets_Target_Group.arn
   }
-
+ 
 }

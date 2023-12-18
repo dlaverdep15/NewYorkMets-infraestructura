@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - desarrollo
+      - 'desarrollo'
 
 permissions:
   pull-requests: write
@@ -23,7 +23,7 @@ jobs:
       
       - name: Terraform init
         run: terraform init
- 
+
       - name: Format
         run: terraform fmt 
 
@@ -32,3 +32,5 @@ jobs:
 
       - name: Plan
         run: terraform plan 
+
+
